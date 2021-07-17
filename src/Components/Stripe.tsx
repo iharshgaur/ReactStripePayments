@@ -1,21 +1,16 @@
-import { CardElement } from "@stripe/react-stripe-js";
+import StripeCheckout from "react-stripe-checkout";
 function Stripe(): JSX.Element {
+  function handleToken(token: any) {
+    console.log(token);
+  }
   return (
-    <CardElement
-      options={{
-        style: {
-          base: {
-            fontSize: "16px",
-            color: "#424770",
-            "::placeholder": {
-              color: "#aab7c4",
-            },
-          },
-          invalid: {
-            color: "#9e2146",
-          },
-        },
-      }}
+    <StripeCheckout
+      stripeKey={process.env.REACT_APP_STRIPE_PUBLIC_KEY || ""}
+      token={handleToken}
+      amount={1234}
+      shippingAddress
+      billingAddress
+      name="Course 1"
     />
   );
 }
